@@ -89,7 +89,6 @@ public class LinHashMap <K, V>
 
     /********************************************************************************
      * Return a set containing all the entries as pairs of keys and values.
-     * @author Jinze Li
      * @return  the set view of the map
      */
     public Set <Map.Entry <K, V>> entrySet ()
@@ -118,7 +117,6 @@ public class LinHashMap <K, V>
 
     /********************************************************************************
      * Given the key, look up the value in the hash table.
-     * @author Jinze Li
      * @param key  the key used for look up
      * @return  the value associated with the key
      */
@@ -139,7 +137,6 @@ public class LinHashMap <K, V>
 
     /********************************************************************************
      * Put the key-value pair in the hash table.
-     * @author Zhe Jin
      * @param key    the key to insert
      * @param value  the value to insert
      * @return  null (not the previous value)
@@ -307,7 +304,6 @@ public class LinHashMap <K, V>
 
     /********************************************************************************
      * Print the hash table.
-     * @author Jinze Li
      */
     private void print ()
     {
