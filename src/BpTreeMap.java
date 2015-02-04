@@ -5,7 +5,6 @@
  * @author  John Miller
  */
 
-
 import java.io.*;
 import java.lang.reflect.Array;
 import static java.lang.System.out;
@@ -94,7 +93,7 @@ public class BpTreeMap <K extends Comparable <K>, V>
         Set <Map.Entry <K, V>> enSet = new HashSet <> ();
 
         //  T O   B E   I M P L E M E N T E D
-            
+
         return enSet;
     } // entrySet
 
@@ -127,9 +126,14 @@ public class BpTreeMap <K extends Comparable <K>, V>
      */
     public K firstKey () 
     {
-        //  T O   B E   I M P L E M E N T E D
+    	//Implemented
+    	Node first = root;
+    	
+    	if(count == 0)//no keys have been accessed
+			throw new NoSuchElementException();
+		
+		return first.key[0];
 
-        return null;
     } // firstKey
 
     /********************************************************************************
@@ -138,9 +142,19 @@ public class BpTreeMap <K extends Comparable <K>, V>
      */
     public K lastKey () 
     {
-        //  T O   B E   I M P L E M E N T E D
+        
+    	//Implemented
+    	Node largest = root;
+    	
+    	if(count == 0)//no keys have been accessed
+			throw new NoSuchElementException();
+		
+    	while (!largest.isLeaf){
+			largest = (Node)largest.key[largest.nKeys];
+		}
+		
+		return largest.key[largest.nKeys - 1];
 
-        return null;
     } // lastKey
 
     /********************************************************************************
@@ -149,9 +163,19 @@ public class BpTreeMap <K extends Comparable <K>, V>
      */
     public SortedMap <K,V> headMap (K toKey)
     {
-        //  T O   B E   I M P L E M E N T E D
-
-        return null;
+        //Implemented
+    	SortedMap<K, V> results = new TreeMap<>();
+    	Node current = root;
+    	
+    	/*while(!current.isLeaf){
+    		for(int i = 0; i < current.nKeys; i++){
+    			//Put largest key
+    			if (toKey.compareTo(current.key[i]) >= 0){
+					current = (Node) current.ref[i + 1];
+    			}
+    	}
+    	 */
+       return null;
     } // headMap
 
     /********************************************************************************
@@ -184,8 +208,14 @@ public class BpTreeMap <K extends Comparable <K>, V>
     public int size ()
     {
         int sum = 0;
-
-        //  T O   B E   I M P L E M E N T E D
+        
+        //Implemented
+        Node current = root;
+        for (int i = 0; i < current.nKeys; i++){
+        	if ( !current.isLeaf) {
+        		sum++;
+        	}
+        }
 
         return  sum;
     } // size

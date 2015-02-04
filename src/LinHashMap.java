@@ -151,8 +151,7 @@ public class LinHashMap <K, V>
        
         if(hTable.size()==0){
         	for(int t=0;t<mod1;t++)
-        	hTable.add(new Bucket(null));
-        	
+        		hTable.add(new Bucket(null));
         }
         if(i<split){
         i=h2(key);
@@ -293,6 +292,7 @@ public class LinHashMap <K, V>
             }
         	
         }
+        
         return null;
     } // put
 
@@ -379,7 +379,7 @@ public class LinHashMap <K, V>
         int nKeys = 30;
         if (args.length == 1) nKeys = Integer.valueOf (args [0]);
         for (int i = 1; i < nKeys; i += 2) ht.put (i, i * i);
-        ht.print ();
+        ht.print (); 
         for (int i = 0; i < nKeys; i++) {
             out.println ("key = " + i + " value = " + ht.get (i));
         } // for
