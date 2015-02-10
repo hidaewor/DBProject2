@@ -151,8 +151,8 @@ public class BpTreeMap <K extends Comparable <K>, V>
     public K firstKey () 
     {
     	Node mostLeftNode = root;
-    	if(count == 0){//no keys have been accessed
-			throw new NoSuchElementException();}
+    	//if(count == 0){//no keys have been accessed
+			//throw new NoSuchElementException();}
     	
 		while (mostLeftNode.isLeaf==false){
 			mostLeftNode = (Node) mostLeftNode.ref[0];
@@ -169,8 +169,8 @@ public class BpTreeMap <K extends Comparable <K>, V>
     	//Implemented
     	Node largest = root;
     	
-    	if(count == 0)//no keys have been accessed
-			throw new NoSuchElementException();
+    	//if(count == 0)//no keys have been accessed
+			//throw new NoSuchElementException();
 
 		while (!largest.isLeaf){
 			largest = (Node) largest.ref[largest.nKeys];
@@ -443,11 +443,6 @@ public class BpTreeMap <K extends Comparable <K>, V>
         
     } // wedge
      
-    /********************************************************************************
-     * tuples Store the tuples.
-     * @param key1    the key to insert
-     * @param ref1    the value to insert
-     */
     
     public class tuples {//makes life easier by pairing up the key and ref for sorting purposes
 		public K keyT;
@@ -485,9 +480,12 @@ public class BpTreeMap <K extends Comparable <K>, V>
 			}
 		};
         Collections.sort(tuples01, tupleOrdering);//put them in order based on keys
-
         
-        Node newNode=new Node(true);//creates the new node which is the right sibling of the current node: n
+        Node newNode=new Node(true);
+        if(n.isLeaf==false){//if the node we are splitting is not a leaf node, then its sibling node is not a leaf node also. 
+    	   newNode.isLeaf=false;
+    	   }
+        
         for(int i=0;i<tuples01.size()-ORDER/2;i++){
         	if(tuples01.get(ORDER/2+i).keyT!=null){
 
@@ -588,51 +586,54 @@ public class BpTreeMap <K extends Comparable <K>, V>
     public static void main (String [] args)
     {
         BpTreeMap <Integer, Integer> bpt = new BpTreeMap <> (Integer.class, Integer.class);
-        int totKeys = 10;
+        int totKeys = 50;
         if (args.length == 1) totKeys = Integer.valueOf (args [0]);
         for (int i = 1; i < totKeys; i += 2) {
         	bpt.put (i, i * i);
         }
         
-        
+        /*//the original skeleton code's print, get and find methods are not sufficient or buggy and will cause errors if you go beyond 10 or 20ish elements. Since it is not our jobs to implement/fix them. I will leave them as they are.
         bpt.print (bpt.root, 0);
         for (int i = 0; i < totKeys; i++) {
             out.println ("key = " + i + " value = " + bpt.get (i));
         } // for
         out.println ("-------------------------------------------");
         out.println ("Average number of nodes accessed = " + bpt.count / (double) totKeys);
-        
-        
-        HashSet enSet=(HashSet) bpt.entrySet();
+        */
+        System.out.println();
+        System.out.println("The hashset of keys and values:");
+        System.out.println("(key=value)");
+        HashSet enSet=(HashSet) bpt.entrySet();//this will return the correct keys and values at the leaf nodes unlike the original skeleton code's get/find methods.
 		Iterator it=enSet.iterator();
         while(it.hasNext())
         {
-          System.out.println("Value :"+it.next());
+          System.out.println(it.next());
         }
         
+        System.out.println();
 
 		System.out.println("First Key: " + bpt.firstKey());
 		System.out.println("Last Key: " + bpt.lastKey());
-
+		System.out.println();
 		out.println("Head map for 3");
 		SortedMap hMap = bpt.headMap(new Integer(3));
 		for (Object obj : hMap.entrySet()){
 			System.out.println(obj);
 		}
-		
+		System.out.println();
 		out.println("Tail map for 7");
 		SortedMap tMap = bpt.tailMap(new Integer(7));
 		for (Object obj : tMap.entrySet()){
 			System.out.println(obj);
 		}
 		
-
+		System.out.println();
 		out.println("Sub map for 3 to 7");
 		SortedMap sMap= bpt.subMap(new Integer(3), new Integer(7));
 		for (Object obj : sMap.entrySet()){
 			System.out.println(obj);
 		}
-		
+		System.out.println();
 		out.println("Size: " + bpt.size());
 		
         
