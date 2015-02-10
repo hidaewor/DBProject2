@@ -443,6 +443,11 @@ public class BpTreeMap <K extends Comparable <K>, V>
         
     } // wedge
      
+    /********************************************************************************
+     * tuples Store the tuples.
+     * @param key1    the key to insert
+     * @param ref1    the value to insert
+     */
     
     public class tuples {//makes life easier by pairing up the key and ref for sorting purposes
 		public K keyT;
